@@ -2,7 +2,7 @@
 
 2D virtuālais apskates ceļvedis Rīgas Valsts tehnikuma telpās. Lietotāji var pārvietoties pa skolas gaiteniem, apmeklēt klases un apskatīt informāciju par katru klasi, kā arī atstāt vērtējumus (1-5 zvaigznes).
 
-## 🎮 Funkcijas
+## Funkcijas
 
 - **Pārvietošanās**: Staigāšana pa RVT gaiteniem 2D vidē
 - **Klases apskate**: Pieeja katrai klasei un informācijas apskatīšana
@@ -10,7 +10,7 @@
 - **Vērtēšanas sistēma**: Katru klasi var novērtēt ar 1-5 zvaigznēm
 - **Vērtējumu attēlošana**: Vidējais vērtējums un kopējais vērtējumu skaits
 
-## 🛠️ Izmantotās tehnoloģijas
+## Izmantotās tehnoloģijas
 
 - **Godot Engine**: 4.x versija
 - **Programmēšanas valoda**: GDScript
