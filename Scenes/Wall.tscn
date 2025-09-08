@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc6mvx843p1ba"]
+
+[ext_resource type="Texture2D" uid="uid://dlaf0vgigyn4x" path="res://Brick wall.png" id="1_2p0br"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkglm"]
+size = Vector2(32.9032, 30.9678)
+
+[node name="Different wall types" type="Node2D"]
+
+[node name="Wall" type="Sprite2D" parent="."]
+scale = Vector2(0.0392157, 0.0416667)
+texture = ExtResource("1_2p0br")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D"]
+position = Vector2(2.73585e-05, 2.95639e-06)
+scale = Vector2(6.2, 6.2)
+shape = SubResource("RectangleShape2D_nkglm")

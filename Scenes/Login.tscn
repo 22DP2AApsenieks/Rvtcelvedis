@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb1a5r07io6ym"]
+
+[ext_resource type="Script" uid="uid://c67fdgyvjapkl" path="res://Scripts/login.gd" id="1_leum0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_leum0")
+
+[node name="LoginPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -248.0
+offset_top = -150.0
+offset_right = 248.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="LoginPanel"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 24.0
+offset_right = 270.0
+offset_bottom = 47.0
+text = "Login"
+
+[node name="Label2" type="Label" parent="LoginPanel"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 80.0
+offset_right = 152.0
+offset_bottom = 103.0
+text = "Email :"
+
+[node name="Label3" type="Label" parent="LoginPanel"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 144.0
+offset_right = 152.0
+offset_bottom = 167.0
+text = "Password : "
+
+[node name="EmailText" type="LineEdit" parent="LoginPanel"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 80.0
+offset_right = 464.0
+offset_bottom = 112.0
+
+[node name="PasswordText" type="LineEdit" parent="LoginPanel"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 144.0
+offset_right = 464.0
+offset_bottom = 176.0
+
+[node name="CancelButton" type="Button" parent="LoginPanel"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 232.0
+offset_right = 184.0
+offset_bottom = 264.0
+text = "Cancel"
+
+[node name="LoginButton" type="Button" parent="LoginPanel"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 232.0
+offset_right = 440.0
+offset_bottom = 264.0
+text = "Login"
+
+[connection signal="pressed" from="LoginPanel/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="LoginPanel/LoginButton" to="." method="_on_login_button_pressed"]
