@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhwe54hnrs333"]
 
-[ext_resource type="Script" uid="uid://c5t1xi6s5mtrq" path="res://Scripts/register.gd" id="1_q1oww"]
+[ext_resource type="Script" uid="uid://c5t1xi6s5mtrq" path="res://Scripts/Login/Register.gd" id="1_q1oww"]
 
-[node name="Control" type="Control"]
+[node name="Register" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,11 +40,11 @@ text = "Register"
 
 [node name="Label2" type="Label" parent="RegisterPanel"]
 layout_mode = 0
-offset_left = 96.0
+offset_left = 64.0
 offset_top = 80.0
-offset_right = 148.0
+offset_right = 153.0
 offset_bottom = 103.0
-text = "Email :"
+text = "Username :"
 
 [node name="Label3" type="Label" parent="RegisterPanel"]
 layout_mode = 0
@@ -54,7 +54,7 @@ offset_right = 148.0
 offset_bottom = 167.0
 text = "Password :"
 
-[node name="EmailText" type="LineEdit" parent="RegisterPanel"]
+[node name="UsernameText" type="LineEdit" parent="RegisterPanel"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 80.0

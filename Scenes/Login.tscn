@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bb1a5r07io6ym"]
 
-[ext_resource type="Script" uid="uid://c67fdgyvjapkl" path="res://Scripts/login.gd" id="1_leum0"]
+[ext_resource type="Script" uid="uid://c67fdgyvjapkl" path="res://Scripts/Login/Login.gd" id="1_leum0"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -36,11 +36,11 @@ text = "Login"
 
 [node name="Label2" type="Label" parent="LoginPanel"]
 layout_mode = 0
-offset_left = 96.0
+offset_left = 64.0
 offset_top = 80.0
-offset_right = 152.0
+offset_right = 153.0
 offset_bottom = 103.0
-text = "Email :"
+text = "Username :"
 
 [node name="Label3" type="Label" parent="LoginPanel"]
 layout_mode = 0
@@ -50,7 +50,7 @@ offset_right = 152.0
 offset_bottom = 167.0
 text = "Password : "
 
-[node name="EmailText" type="LineEdit" parent="LoginPanel"]
+[node name="UsernameText" type="LineEdit" parent="LoginPanel"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 80.0
