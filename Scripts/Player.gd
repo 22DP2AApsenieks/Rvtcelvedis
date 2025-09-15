@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
-@export var speed := 200.0
-@export var interact_area_path: NodePath = ^"InteractArea"  # set in Inspector if needed
-@onready var interact_area: Area2D = get_node_or_null(interact_area_path)
+@export var speed: float = 200.0
 
-# optional: a small on-screen hint label you might be using
-@export var hint_label_path: NodePath
+# Set these in the Inspector if your names differ
+@export var interact_area_path: NodePath = NodePath("InteractArea")
+@export var hint_label_path: NodePath          # optional; e.g. CanvasLayer/InteractHint/Label
+
+@onready var interact_area: Area2D = get_node_or_null(interact_area_path)
 @onready var hint_lbl: Label = get_node_or_null(hint_label_path)
 
 func _physics_process(_delta: float) -> void:
@@ -15,7 +16,6 @@ func _physics_process(_delta: float) -> void:
 	velocity = dir.normalized() * speed
 	move_and_slide()
 
-	# update hint visibility if you use one
 	if hint_lbl:
 		var n := _nearest_interactable()
 		hint_lbl.visible = n != null
@@ -29,11 +29,11 @@ func _input(event: InputEvent) -> void:
 			n.interact(self)
 
 func _nearest_interactable() -> Interactable:
-	if not $InteractArea:
+	if interact_area == null:
 		return null
 	var nearest: Interactable = null
 	var best := INF
-	for a in $InteractArea.get_overlapping_areas():
+	for a in interact_area.get_overlapping_areas():
 		if a is Interactable:
 			var d := global_position.distance_to(a.global_position)
 			if d < best:

@@ -1,82 +1,114 @@
 extends Node
 
-const GLOBAL_FILE: String = "user://ratings_global.json"
-const PERUSER_FILE: String = "ratings_user.json"   # stored inside the user's profile folder
+# One shared location for ALL users (aggregates stack here)
+const SHARED_DIR   := "user://shared"
+const GLOBAL_FILE  := SHARED_DIR + "/ratings_global.json"
 
-# ---------- internals ----------
+# Each user also gets their own file so we can remember their last vote
+const PERUSER_FILE := "ratings_user.json"
+
+# ---------- helpers ----------
 static func _current_user() -> String:
+	var u := "guest"
 	if Engine.has_singleton("AuthService"):
-		var u: String = String(AuthService.current_user())
-		return u if u != "" else "guest"
-	return "guest"
+		u = String(AuthService.current_user())
+	if u == "":
+		u = "guest"
+	return u
+
+static func _ensure_shared_dir() -> void:
+	DirAccess.make_dir_recursive_absolute(SHARED_DIR)
+
+static func _load_json(path: String) -> Dictionary:
+	if not FileAccess.file_exists(path):
+		return {}
+	var f := FileAccess.open(path, FileAccess.READ)
+	if f == null:
+		return {}
+	var txt := f.get_as_text()
+	f.close()
+	var d: Variant = JSON.parse_string(txt)
+	return d if typeof(d) == TYPE_DICTIONARY else {}
+
+
+static func _save_json(path: String, data: Dictionary) -> void:
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		push_error("Ratings: couldn't open %s for write" % path)
+		return
+	f.store_string(JSON.stringify(data, "\t"))
+	f.close()
 
 static func _load_global() -> Dictionary:
-	return SaveLoad.load_json(GLOBAL_FILE)
+	return _load_json(GLOBAL_FILE)
 
 static func _save_global(g: Dictionary) -> void:
-	SaveLoad.save_json(GLOBAL_FILE, g)
+	_ensure_shared_dir()
+	_save_json(GLOBAL_FILE, g)
+
+static func _profile_dir() -> String:
+	return "user://profiles/%s" % _current_user()
+
+static func _ensure_profile_dir() -> void:
+	DirAccess.make_dir_recursive_absolute(_profile_dir())
+
+static func _user_file() -> String:
+	return "%s/%s" % [_profile_dir(), PERUSER_FILE]
 
 static func _load_user() -> Dictionary:
-	return SaveLoad.load_json(SaveLoad.profile_path(PERUSER_FILE))
+	return _load_json(_user_file())
 
 static func _save_user(d: Dictionary) -> void:
-	SaveLoad.save_json(SaveLoad.profile_path(PERUSER_FILE), d)
+	_ensure_profile_dir()
+	_save_json(_user_file(), d)
 
-# ---------- public API ----------
-func submit_toilet_rating(toilet_id: String, stars: int) -> Dictionary:
-	# clamp stars
-	stars = clampi(stars, 1, 5)
-	var user: String = _current_user()
+# ---------- Public API ----------
 
-	# global file
-	var g: Dictionary = _load_global()
-	if not g.has("toilets"):
-		g["toilets"] = {}
-	var toilets: Dictionary = g["toilets"] as Dictionary
+# Add/update a vote and return new summary
+static func submit_toilet_rating(toilet_id: String, stars: int) -> Dictionary:
+	stars = clamp(stars, 1, 5)
+	var user := _current_user()
 
-	# record for this toilet
-	var t: Dictionary = (toilets.get(toilet_id, {"sum": 0, "count": 0, "by_user": {}}) as Dictionary)
-	var by_user: Dictionary = (t.get("by_user", {}) as Dictionary)
+	var g := _load_global()
+	var toilets: Dictionary = g.get("toilets", {})
+	var t: Dictionary = toilets.get(toilet_id, {"sum": 0, "count": 0, "by_user": {}})
 
+	var by_user: Dictionary = t.get("by_user", {})
 	var prev: int = int(by_user.get(user, 0))
+
 	if prev > 0:
-		# user is changing their vote
+		# update existing vote
 		t["sum"] = int(t.get("sum", 0)) - prev + stars
 		by_user[user] = stars
+		t["by_user"] = by_user
 	else:
-		# new vote
+		# first time voting
 		t["sum"] = int(t.get("sum", 0)) + stars
 		t["count"] = int(t.get("count", 0)) + 1
 		by_user[user] = stars
+		t["by_user"] = by_user
 
-	t["by_user"] = by_user
 	toilets[toilet_id] = t
 	g["toilets"] = toilets
 	_save_global(g)
 
-	# per-user file (optional history)
-	var per: Dictionary = _load_user()
-	var my_toilets: Dictionary = (per.get("toilets", {}) as Dictionary)
-	my_toilets[toilet_id] = stars
-	per["toilets"] = my_toilets
-	_save_user(per)
+	# also store in user's personal history (optional)
+	var u := _load_user()
+	var my: Dictionary = u.get("votes", {})
+	my[toilet_id] = stars
+	u["votes"] = my
+	_save_user(u)
 
-	var count: int = int(t.get("count", 0))
-	var avg: float = 0.0 if count == 0 else float(int(t.get("sum", 0))) / float(count)
+	var sum := int(t.get("sum", 0))
+	var count := int(t.get("count", 0))
+	var avg := 0.0 if count == 0 else float(sum) / float(count)
 	return {"ok": true, "avg": avg, "count": count, "yours": stars}
 
-func get_toilet_info(toilet_id: String) -> Dictionary:
-	var g: Dictionary = _load_global()
-	var toilets: Dictionary = (g.get("toilets", {}) as Dictionary)
-	var t: Dictionary = (toilets.get(toilet_id, {}) as Dictionary)
-	if t.is_empty():
-		return {"avg": 0.0, "count": 0}
-	var sum_i: int = int(t.get("sum", 0))
-	var count_i: int = int(t.get("count", 0))
-	var avg_f: float = 0.0 if count_i == 0 else float(sum_i) / float(count_i)
-	return {"avg": avg_f, "count": count_i}
-
-static func get_user_toilet_rating(toilet_id: String) -> int:
-	var per: Dictionary = _load_user()
-	var my_toilets: Dictionary = (per.get("toilets", {}) as Dictionary)
-	return int(my_toilets.get(toilet_id, 0))
+# Read-only info for UI labels, etc.
+static func get_toilet_info(toilet_id: String) -> Dictionary:
+	var g := _load_global()
+	var t: Dictionary = (g.get("toilets", {}) as Dictionary).get(toilet_id, {}) as Dictionary
+	var sum := int(t.get("sum", 0))
+	var count := int(t.get("count", 0))
+	var avg := 0.0 if count == 0 else float(sum) / float(count)
+	return {"avg": avg, "count": count}
