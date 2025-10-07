@@ -12,7 +12,7 @@
 
 ## Izmantotās tehnoloģijas
 
-- **Godot Engine**: 4.x versija
+- **Godot Engine**: 4.5 versija
 - **Programmēšanas valoda**: GDScript
 - **Grafika**: 2D sprite'i vai pikseļu māksla
 - **Datu glabāšana**: JSON fails vērtējumu uzglabāšanai
