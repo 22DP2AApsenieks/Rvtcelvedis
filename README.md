@@ -1,18 +1,106 @@
-# 2D RVT Ceļvedis
+# 🏫 Rīgas RVT skolas izpētes spēle
 
-2D virtuālais apskates ceļvedis Rīgas Valsts tehnikuma telpās. Lietotāji var pārvietoties pa skolas gaiteniem, apmeklēt klases un apskatīt informāciju par katru klasi, kā arī atstāt vērtējumus (1-5 zvaigznes).
+Interaktīva 2D spēle, veidota ar **Godot Engine 4.5**, kurā spēlētājs var pārvietoties pa Rīgas RVT stāviem, aplūkot klases, skolotājus un priekšmetus, kā arī pārvietoties starp stāviem, izmantojot kāpnes un portālus.
 
-## Funkcijas
+---
 
-- **Pārvietošanās**: Staigāšana pa RVT gaiteniem 2D vidē
-- **Klases apskate**: Pieeja katrai klasei un informācijas apskatīšana
-- **Informācijas panelis**: Katras klases detaļas (klases numurs, skolotājs, apraksts)
-- **Vērtēšanas sistēma**: Katru klasi var novērtēt ar 1-5 zvaigznēm
-- **Vērtējumu attēlošana**: Vidējais vērtējums un kopējais vērtējumu skaits
+##  Funkcijas
 
-## Izmantotās tehnoloģijas
+-  **Spēlētāja vadība** – kustība ar **WASD**, skata grozīšana ar **← / →** taustiņiem.
+-  **Interaktīvas klases** – nospiežot **E**, var apskatīt:
+  - Klases numuru un nosaukumu  
+  - Skolotāju vārdus  
+  - Priekšmetus  
+  - Aprakstu un attēlu (ja pieejams)
+-  **Stāvu maiņa** – pārvietošanās starp stāviem, izmantojot kāpnes vai portālus.
+-  **Administratora panelis**  
+  - Lietotāju un vērtējumu pārvaldība  
+  - Klases pievienošana, rediģēšana un dzēšana
+-  **Pauzes izvēlne** – **ESC** taustiņš aptur spēli, ļauj turpināt vai iziet.
+-  **Interakcijas norāde** – parādās teksts, kad spēlētājs tuvojas objektiem, ar kuriem var mijiedarboties.
 
-- **Godot Engine**: 4.5 versija
-- **Programmēšanas valoda**: GDScript
-- **Grafika**: 2D sprite'i vai pikseļu māksla
-- **Datu glabāšana**: JSON fails vērtējumu uzglabāšanai
+---
+
+##  Kā palaist projektu
+
+### 1️⃣ Variants – palaist Godot redaktorā (ieteicams)
+1. Lejupielādē un uzstādi **[Godot Engine 4.5](https://godotengine.org/download)**.  
+2. Lejupielādē šo repozitoriju vai tā ZIP failu un atarhivē to.  
+3. Atver **Godot Engine**, izvēlies **“Import” → “Browse”** un atver failu **`project.godot`** no atarhivētās mapes.  
+4. Kad projekts ir ielādēts, spied **▶️ Play** vai nospied **F5**, lai palaistu spēli.
+
+---
+
+### 2️⃣ Variants – palaist jau gatavu versiju (ja pieejama)
+1. Ja repozitorijā ir mape **build/** vai **export/**, lejupielādē jaunāko versiju no sadaļas **Releases**.  
+2. Atarhivē failu.  
+3. Palaid izpildāmo failu (piemēram, `RVT_Spele.exe` Windows vidē).
+
+---
+
+##  Vadība
+
+| Darbība | Taustiņš |
+|----------|-----------|
+| Kustība | **W / A / S / D** |
+| Skriet | **Shift** |
+| Mijiedarboties | **E** |
+| Pagriezt kameru | **← / →** |
+| Pauze | **ESC** |
+
+---
+
+## 📁 Mapju struktūra
+
+├── Scenes/
+│ ├── Floors/ # Stāvu ainas (Floor1.tscn, Floor2.tscn, Floor3.tscn u.c.)
+│ ├── Classroom.tscn # Klases interaktīvā aina
+│ ├── AdminPanel.tscn # Administratora panelis
+│ ├── PauseMenu.tscn # Pauzes izvēlne
+│ └── Main.tscn # Galvenā spēles aina
+│
+├── Scripts/
+│ ├── Player.gd # Spēlētāja kustība un mijiedarbība
+│ ├── Classroom.gd # Klases informācijas loga loģika
+│ ├── Interactable.gd # Pamatklase interaktīviem objektiem
+│ ├── InteractHint.gd # Norāžu sistēma
+│ └── Main.gd # Galvenā spēles loģika (stāvu maiņa utt.)
+│
+├── Data/
+│ ├── users.json # Lietotāju datu bāze
+│ └── sessions.json # Sesiju dati
+│
+└── project.godot # Godot projekta fails
+
+
+---
+
+## ⚙️ Prasības
+
+- **Godot Engine:** versija 4.5 vai jaunāka  
+- **GPU:** jebkurš ar OpenGL 3.3+ atbalstu  
+- **Operētājsistēma:** Windows / Linux / macOS  
+
+---
+
+##  Autori
+
+**Tomass Siliņš ,Ādams Apšenieks, Ralfs Pētersons, Matīss Savickis, Aleksis Virvinskis**  
+Grupa: **DP4-2**  
+Rīgas Valsts tehnikums (RVT)
+
+---
+
+##  Licence
+
+Šis projekts izstrādāts **izglītojošiem mērķiem**.  
+Atļauts skatīt, labot un kopīgot **nekomerciālos nolūkos**, norādot autoru.
+
+---
+
+##  Piezīmes
+
+- Kad augšupielādē projektu GitHub, pārliecinies, ka **`project.godot`** fails atrodas mapes saknē.  
+- JSON faili (`users.json`, `sessions.json` u.c.) sākotnēji var būt tukši – tie tiks aizpildīti automātiski, kad spēle tiks palaista pirmo reizi.
+
+---
