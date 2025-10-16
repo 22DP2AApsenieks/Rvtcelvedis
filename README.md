@@ -52,25 +52,25 @@ Interaktīva 2D spēle, veidota ar **Godot Engine 4.5**, kurā spēlētājs var 
 
 ## 📁 Mapju struktūra
 
-├── Scenes/
-│ ├── Floors/ # Stāvu ainas (Floor1.tscn, Floor2.tscn, Floor3.tscn u.c.)
-│ ├── Classroom.tscn # Klases interaktīvā aina
-│ ├── AdminPanel.tscn # Administratora panelis
-│ ├── PauseMenu.tscn # Pauzes izvēlne
-│ └── Main.tscn # Galvenā spēles aina
-│
-├── Scripts/
-│ ├── Player.gd # Spēlētāja kustība un mijiedarbība
-│ ├── Classroom.gd # Klases informācijas loga loģika
-│ ├── Interactable.gd # Pamatklase interaktīviem objektiem
-│ ├── InteractHint.gd # Norāžu sistēma
-│ └── Main.gd # Galvenā spēles loģika (stāvu maiņa utt.)
-│
-├── Data/
-│ ├── users.json # Lietotāju datu bāze
-│ └── sessions.json # Sesiju dati
-│
-└── project.godot # Godot projekta fails
+├── Scenes/<br>
+│ ├── Floors/ # Stāvu ainas (Floor1.tscn, Floor2.tscn, Floor3.tscn u.c.)<br>
+│ ├── Classroom.tscn # Klases interaktīvā aina<br>
+│ ├── AdminPanel.tscn # Administratora panelis<br>
+│ ├── PauseMenu.tscn # Pauzes izvēlne<br>
+│ └── Main.tscn # Galvenā spēles aina<br>
+│<br>
+├── Scripts/<br>
+│ ├── Player.gd # Spēlētāja kustība un mijiedarbība<br>
+│ ├── Classroom.gd # Klases informācijas loga loģika<br>
+│ ├── Interactable.gd # Pamatklase interaktīviem objektiem<br>
+│ ├── InteractHint.gd # Norāžu sistēma<br>
+│ └── Main.gd # Galvenā spēles loģika (stāvu maiņa utt.)<br>
+│<br>
+├── Data/<br>
+│ ├── users.json # Lietotāju datu bāze <br>
+│ └── sessions.json # Sesiju dati<br>
+│<br>
+└── project.godot # Godot projekta fails<br>
 
 
 ---
