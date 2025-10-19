@@ -37,6 +37,23 @@ Interaktīva 2D spēle, veidota ar **Godot Engine 4.5**, kurā spēlētājs var 
 3. Palaid izpildāmo failu (piemēram, `RVT_Spele.exe` Windows vidē).
 
 ---
+## 🔐 Kā piekļūt Administratora panelim
+
+### Piekļuves soļi:
+1. **Palaid spēli** un autorizējies ar administratora kontakontiem
+2. **Galvenajā izvēlnē** (MainMenu) meklē pogu vai opciju "Admin Panel" / "Administratora panelis"
+3. **Pēc veiksmīgas autorizācijas** kā administrators, tev būs pieejama administratora paneļa sadaļa
+
+### Administratora tiesības:
+- Lietotāju pārvaldība (pievienošana, dzēšana, rediģēšana)
+- Vērtējumu skatīšana un pārvaldība
+- Klases informācijas pievienošana un rediģēšana
+- Sistēmas iestatījumu pārvaldība
+
+### Piezīme:
+- Administratora konts jāizveido manuāli **`Data/users.json`** failā vai ar reģistrācijas formu, norādot lietotāja tipu kā `"admin"` vai `"administrator"`
+- Pirmā palaišanas reizē, ja nav neviena administratora, iespējams, būs jāizveido administrators tieši JSON failā
+---
 
 ##  Vadība
 
@@ -104,3 +121,4 @@ Atļauts skatīt, labot un kopīgot **nekomerciālos nolūkos**, norādot autoru
 - JSON faili (`users.json`, `sessions.json` u.c.) sākotnēji var būt tukši – tie tiks aizpildīti automātiski, kad spēle tiks palaista pirmo reizi.
 
 ---
+
