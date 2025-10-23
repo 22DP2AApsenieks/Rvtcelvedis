@@ -1,4 +1,4 @@
-# 🏫 Rīgas RVT skolas izpētes spēle
+# Rīgas RVT skolas izpētes spēle
 
 Interaktīva 2D spēle, veidota ar **Godot Engine 4.5**, kurā spēlētājs var pārvietoties pa Rīgas RVT stāviem, aplūkot klases, skolotājus un priekšmetus, kā arī pārvietoties starp stāviem, izmantojot kāpnes un portālus.
 
@@ -37,7 +37,7 @@ Interaktīva 2D spēle, veidota ar **Godot Engine 4.5**, kurā spēlētājs var 
 3. Palaid izpildāmo failu (piemēram, `RVT_Spele.exe` Windows vidē).
 
 ---
-## 🔐 Kā piekļūt Administratora panelim
+## Kā piekļūt Administratora panelim
 
 ### Piekļuves soļi:
 1. **Palaid spēli** un dodies uz login/reģistrācijas ekrānu
@@ -72,7 +72,7 @@ Interaktīva 2D spēle, veidota ar **Godot Engine 4.5**, kurā spēlētājs var 
 
 ---
 
-## 📁 Mapju struktūra
+## Mapju struktūra
 
 ├── Scenes/<br>
 │ ├── Floors/ # Stāvu ainas (Floor1.tscn, Floor2.tscn, Floor3.tscn u.c.)<br>
@@ -126,5 +126,6 @@ Atļauts skatīt, labot un kopīgot **nekomerciālos nolūkos**, norādot autoru
 - JSON faili (`users.json`, `sessions.json` u.c.) sākotnēji var būt tukši – tie tiks aizpildīti automātiski, kad spēle tiks palaista pirmo reizi.
 
 ---
+
 
 
